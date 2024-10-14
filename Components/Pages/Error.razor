@@ -10,7 +10,7 @@
     <div class="error-message">
         <p>@errorMessage</p>
     </div>
-    <button @onclick="GotoLogin" class="back-to-login-button">Gimpies Login</button>
+    <a class="btn btn-primary" role="button" href="/login">Gimpies Login</a>
 </div>
 
 @code {
@@ -36,11 +36,5 @@
     protected override void OnInitialized()
     {
         errorMessage = errorMessages.ContainsKey(statusCode) ? errorMessages[statusCode] : "Er is een onbekende fout opgetreden!";
-    }
-
-    public void GotoLogin()
-    {
-        Console.WriteLine("Navigating to Login page...");
-        NavManager.NavigateTo("/Login");
     }
 }
