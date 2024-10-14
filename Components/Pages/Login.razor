@@ -3,20 +3,67 @@
 
 <PageTitle>Gimpies Login</PageTitle>
 
-<h2>Gimpies Login</h2>
+<style>
+    body {
+        background-color: #121212; 
+        color: #ffffff;
+    }
 
-<div>
-    <label>Gebruikersnaam: </label>
-    <input @bind="username" placeholder="Voer je gebruikersnaam in" />
-</div>
+    .login-card {
+        width: 500px;
+        height: 400px;
+        margin: auto;
+        margin-top: 250px;
+        padding: 50px;
+        background-color: #1f1f1f;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-<div>
-    <label>Wachtwoord: </label>
-    <input @bind="password" type="password" placeholder="Voer je wachtwoord in" />
-</div>
+    .btn-custom {
+        background-color: #007bff;
+        color: white; 
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+    }
 
-<div>
-    <a class="btn btn-primary" role="button" href="/login">Inloggen</a>
+    .btn-custom:hover {
+        background-text-center: #0056b3;
+    }
+
+    .register {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .form {
+        margin-top: 30px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="login-card">
+        <h2 class="text-center">Gimpies Login</h2>
+        <div class="form">
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="username" @bind="username" placeholder="Gebruikersnaam" required />
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="password" @bind="password" placeholder="Wachtwoord" required />
+                </div>
+
+                <button type="submit" class="btn btn-custom" @onclick="HandleLogin">Inloggen</button>
+
+                <div class="register">
+                    Heb je nog geen account? 
+                    <a href="/registeren">Registreren</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @code {
@@ -27,15 +74,15 @@
     {
         if (username == "admin" && password == "1234")
         {
-            // login
+            // login logic
         }
-        else if (username == null || password == null)
+        else if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            // fill in all fields
+            // fill in all fields logic
         }
         else
         {
-            // invalid login
+            // invalid login logic
         }
     }
 }
