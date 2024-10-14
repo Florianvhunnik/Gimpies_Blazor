@@ -1,0 +1,41 @@
+﻿@page "/"
+@page "/Login"
+
+<PageTitle>Gimpies Login</PageTitle>
+
+<h2>Gimpies Login</h2>
+
+<div>
+    <label>Gebruikersnaam: </label>
+    <input @bind="username" placeholder="Voer je gebruikersnaam in" />
+</div>
+
+<div>
+    <label>Wachtwoord: </label>
+    <input @bind="password" type="password" placeholder="Voer je wachtwoord in" />
+</div>
+
+<div>
+    <a class="btn btn-primary" role="button" href="/login">Inloggen</a>
+</div>
+
+@code {
+    private string? username;
+    private string? password;
+
+    private void HandleLogin()
+    {
+        if (username == "admin" && password == "1234")
+        {
+            // login
+        }
+        else if (username == null || password == null)
+        {
+            // fill in all fields
+        }
+        else
+        {
+            // invalid login
+        }
+    }
+}
