@@ -2,8 +2,8 @@ namespace Gimpies_Blazor.Models;
 
 public class Users
 {
-    public int GebruikerId { get; set; }
-    public string? Gebruikersnaam { get; set; }
-    public string? Wachtwoord { get; set; }
-    public string? Rol { get; set; }
+    public int UserId { get; set; }
+    public string? Username { get; set; }
+    public string? Password { get; set; }
+    public string? Role { get; set; }
 }
