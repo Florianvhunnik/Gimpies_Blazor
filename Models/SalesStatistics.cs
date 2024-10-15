@@ -1,5 +1,3 @@
-using System;
-
 namespace Gimpies_Blazor.Models;
 
 public class SalesStatistics
