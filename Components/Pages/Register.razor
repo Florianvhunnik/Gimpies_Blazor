@@ -1,0 +1,98 @@
+﻿@page "/Register"
+
+<PageTitle>Gimpies Registreren</PageTitle>
+
+<style>
+    body {
+        background-color: #121212; 
+        color: #ffffff;
+    }
+
+    .login-card {
+        width: 500px;
+        height: 400px;
+        margin: auto;
+        margin-top: 200px;
+        padding: 50px;
+        background-color: #1f1f1f;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-custom {
+        background-color: #007bff;
+        color: white; 
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .btn-custom:hover {
+        background-text-center: #0056b3;
+    }
+
+    .register {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .form {
+        margin-top: 30px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="login-card">
+        <h2 class="text-center">Gimpies Registreren</h2>
+        <div class="form">
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="username" @bind="username" placeholder="Gebruikersnaam" required />
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="password" @bind="password" placeholder="Wachtwoord" required />
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="password_confirm" @bind="password_confirm" placeholder="Herhaal Wachtwoord" required />
+                </div>
+
+                <button type="submit" class="btn btn-custom" @onclick="() => HandleRegister()">Registreren</button>
+
+                <div class="register">
+                    Heb je al een account? 
+                    <a href="/login">Inloggen</a>
+                </div>
+            </form>
+        </div>
+        @if (showWarning)
+        {
+            <div class="alert alert-warning" role="alert">
+                De wachtwoorden komen niet overeen!
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private string? username;
+    private string? password;
+    private string? password_confirm;
+    private bool showWarning = false;
+    private void HandleRegister()
+    {
+        if (password == password_confirm)
+        {
+            showWarning = false;
+        }
+        else
+        {
+            showWarning = true;
+        }
+    }
+}
