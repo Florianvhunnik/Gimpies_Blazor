@@ -4,14 +4,55 @@
 
 <PageTitle>Error</PageTitle>
 
-<div class="error-container">
-    <div class="error-code">
-        <h1>@statusCode</h1>
+<style>
+    body {
+        background-color: #121212; 
+        color: #ffffff;
+    }
+
+    .login-card {
+        width: 500px;
+        height: 250px;
+        margin: auto;
+        margin-top: 200px;
+        padding: 50px;
+        background-color: #1f1f1f;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-custom {
+        background-color: #007bff;
+        color: white; 
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .btn-custom:hover {
+        background-text-center: #0056b3;
+    }
+
+    .register {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .form {
+        margin-top: 30px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="login-card">
+        <h1 class="text-center">@statusCode</h1>
+        <p class="text-center">@errorMessage</p>
+        <a class="btn btn-custom" role="button" href="/login">Gimpies Login</a>
     </div>
-    <div class="error-message">
-        <p>@errorMessage</p>
-    </div>
-    <a class="btn btn-primary" role="button" href="/login">Gimpies Login</a>
 </div>
 
 @code {
