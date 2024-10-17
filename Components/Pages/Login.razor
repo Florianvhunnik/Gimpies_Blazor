@@ -11,7 +11,7 @@
 
     .login-card {
         width: 500px;
-        height: 350px;
+        height: auto;
         margin: auto;
         margin-top: 200px;
         padding: 50px;
@@ -42,8 +42,17 @@
     }
 
     .btn:hover {
-        background-color: #0056b3;
+    background-color: #0056b3;
+}
+
+    .notify {
+        margin-top: 13px;
     }
+
+    .btn-close:focus {
+        box-shadow: none;
+    }
+
 </style>
 
 <div class="container mt-5">
@@ -57,9 +66,19 @@
 
                 <div class="mb-3">
                     <input type="password" class="form-control" id="password" @bind="password" placeholder="Wachtwoord" required />
+
+                    @if (warningMessage != null)
+                    {
+                        <div class="notify">
+                            <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
+                                @warningMessage
+                                <button type="reset" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @onclick="ClearWarningMessage"></button>
+                            </div>
+                        </div>
+                    }
                 </div>
 
-                <button type="submit" class="btn btn-custom" @onclick="HandleLogin">Inloggen</button>
+                <button type="button" class="btn btn-custom" @onclick="HandleLogin">Inloggen</button>
 
                 <div class="register">
                     Heb je nog geen account? 
@@ -73,20 +92,31 @@
 @code {
     private string? username;
     private string? password;
+    private string? warningMessage;
 
     private void HandleLogin()
     {
-        if (username == "admin" && password == "1234")
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            warningMessage = "Vul alle velden correct in!";
+        }
+        else if (username == "admin" && password == "1234")
         {
             // login logic
-        }
-        else if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-        {
-            // fill in all fields logic
+            warningMessage = null;
         }
         else
         {
-            // invalid login logic
+            warningMessage = "Ongeldige inloggegevens!";
         }
+
+        // Debug prints
+        Console.WriteLine($"Username: {username}");
+        Console.WriteLine($"Password: {password}");
+    }
+
+    private void ClearWarningMessage()
+    {
+        warningMessage = null;
     }
 }
