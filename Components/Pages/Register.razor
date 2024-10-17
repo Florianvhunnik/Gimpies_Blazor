@@ -10,7 +10,7 @@
 
     .login-card {
         width: 500px;
-        height: 400px;
+        height: auto;
         margin: auto;
         margin-top: 200px;
         padding: 50px;
@@ -43,6 +43,15 @@
     .btn:hover {
         background-color: #0056b3;
     }
+
+    .notify {
+        margin-top: 13px;
+    }
+
+    .btn-close:focus {
+        box-shadow: none;
+    }
+
 </style>
 
 <div class="container mt-5">
@@ -60,9 +69,18 @@
 
                 <div class="mb-3">
                     <input type="password" class="form-control" id="password_confirm" @bind="password_confirm" placeholder="Herhaal Wachtwoord" required />
+                    @if (warningMessage != null)
+                    {
+                        <div class="notify">
+                            <div class="alert alert-warning alert-dismissible fade show alert-custom" role="alert">
+                                @warningMessage
+                                <button type="reset" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    }
                 </div>
 
-                <button type="submit" class="btn btn-custom" @onclick="() => HandleRegister()">Registreren</button>
+                <button type="reset" class="btn btn-custom" @onclick="HandleRegister">Registreren</button>
 
                 <div class="register">
                     Heb je al een account? 
@@ -70,12 +88,6 @@
                 </div>
             </form>
         </div>
-        @if (showWarning)
-        {
-            <div class="alert alert-warning" role="alert">
-                De wachtwoorden komen niet overeen!
-            </div>
-        }
     </div>
 </div>
 
@@ -83,16 +95,28 @@
     private string? username;
     private string? password;
     private string? password_confirm;
-    private bool showWarning = false;
+    private string? warningMessage;
+    
     private void HandleRegister()
     {
-        if (password == password_confirm)
+        // Check if all fields are filled in and if the passwords match
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(password_confirm))
         {
-            showWarning = false;
+            warningMessage = "Vul alle velden correct in!";
+        }
+        else if (password != password_confirm)
+        {
+            warningMessage = "De wachtwoorden komen niet overeen!";
         }
         else
         {
-            showWarning = true;
+            warningMessage = null;
+            //return;
         }
+
+        // Debug prints
+        Console.WriteLine($"Username: {username}");
+        Console.WriteLine($"Password: {password}");
+        Console.WriteLine($"Password Confirm: {password_confirm}\n");
     }
 }
